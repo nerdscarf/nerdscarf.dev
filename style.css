@@ -1,0 +1,243 @@
+/* load google font */
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+
+@font-face {
+  font-family: 'Xanh Mono';
+  src: url(XanhMono-Regular.ttf);
+}
+
+/* reset defaults */
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+/* css variables */
+:root {
+  --desktop-color: #ff78f0;
+  --desktop-text-color: #ffffff;
+
+  --title-bar-color: #cccccc;
+  --title-bar-text-color: #333333;
+  --title-bar-highlight-color: #aaaaaa;
+  --title-bar-height: 32px;
+
+  --pane-content-background-color: #ffffff;
+
+  /* Neo Brutalist Design */
+  --pane-default-width: 320px;
+  --pane-default-height: 360px;
+  --pane-border-radius: 8px;
+
+  --neo-default-width: 400px;
+  --neo-default-height: 500px;
+  /* --neo-border-radius: 27px; */
+
+  --neo-bar-color: ;
+}
+
+header h1 {
+  font-family: 'Xanh Mono', monospace;
+}
+
+body {
+  background: var(--desktop-color);
+
+  /* if outside of the window, clip */
+  height: 100vh;
+  overflow: clip;
+}
+
+h1 {
+  color: var(--desktop-text-color);
+  padding: 32px;
+  font-size: 1.5rem;
+}
+
+/* Original */
+.pane {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  position: absolute;
+  width: var(--pane-default-width);
+  height: var(--pane-default-height);
+
+  display: grid;
+  grid-template-rows: var(--title-bar-height) 1fr;
+
+  border-radius: var(--pane-border-radius);
+  /* box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5); */
+
+  overflow: clip;
+
+  min-width: 160px;
+  min-height: 160px;
+}
+
+.pane .title {
+  position: relative;
+  cursor: move;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--title-bar-color);
+  color: var(--title-bar-text-color);
+}
+
+.pane .window-controls {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  gap: 6px;
+}
+
+.pane .red-dot {
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  border-radius: 50%;
+  /* cursor: pointer; */
+}
+
+.pane h2 {
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.pane .content {
+  position: relative;
+  background-color: var(--pane-content-background-color);
+}
+
+/* make image fill the space */
+.pane .content img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+
+  object-fit: cover;
+
+  -webkit-user-drag: none;
+  user-drag: none;
+}
+
+/* add a corner in bottom right */
+.pane .corner {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 24px;
+  height: 24px;
+
+  /* north west to south east */
+  cursor: nwse-resize;
+
+  /* background-color: red; */
+}
+
+.pane.is-dragging .title {
+  background-color: var(--title-bar-highlight-color);
+}
+
+/* Neobrutalism */
+.neo {
+  font-family: 'Public Sans', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  position: absolute;
+
+  width: var(--neo-default-width);
+  /* height: var(--neo-default-height); */
+  aspect-ratio: 3/4;
+
+  display: grid;
+  grid-template-rows: var(--title-bar-height) 1fr;
+
+  /* border-radius: var(--neo-border-radius); */
+  box-shadow: 4px 6px;
+
+  overflow: clip;
+
+  min-width: 160px;
+  min-height: 160px;
+
+  border: solid black 4px;
+}
+
+.neo .title {
+  cursor: move;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  background-color: var(--title-bar-color);
+  color: var(--title-bar-text-color);
+  border-bottom: solid black 2px;
+}
+
+.neo .title-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.close-container {
+  display: flex;
+  cursor: pointer;
+}
+
+.neo .title img {
+  width: 20px;
+}
+
+.neo h2 {
+  font-size: 1rem;
+  margin: 0;
+}
+
+.neo .content {
+  position: relative;
+  background-color: var(--pane-content-background-color);
+}
+
+/* make image fill the space */
+.neo .content img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+
+  object-fit: cover;
+
+  -webkit-user-drag: none;
+  user-drag: none;
+}
+
+/* add a corner in bottom right */
+.neo .corner {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 24px;
+  height: 24px;
+
+  /* north west to south east */
+  cursor: nwse-resize;
+
+  /* background-color: red; */
+}
+
+.neo.is-dragging .title {
+  background-color: var(--title-bar-highlight-color);
+}

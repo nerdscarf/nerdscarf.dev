@@ -1,5 +1,6 @@
 const panes = document.querySelectorAll('.pane')
 const neos = document.querySelectorAll('.neo')
+const tbs = document.querySelectorAll('.tb')
 
 let z = 1
 
@@ -125,11 +126,72 @@ panes.forEach((pane) => {
   })
 })
 
+tbs.forEach((tb) => {
+  const title = tb.querySelector('.title')
+  const corner = tb.querySelector('.corner')
+
+  tb.addEventListener('mousedown', () => {
+    z = z + 1
+    tb.style.zIndex = z
+  })
+
+  title.addEventListener('mousedown', (event) => {
+    tb.classList.add('is-dragging')
+
+    let l = tb.offsetLeft
+    let t = tb.offsetTop
+
+    let startX = event.pageX
+    let startY = event.pageY
+
+    const drag = (event) => {
+      event.preventDefault()
+
+      tb.style.left = l + (event.pageX - startX) + 'px'
+      tb.style.top = t + (event.pageY - startY) + 'px'
+    }
+
+    const mouseup = () => {
+      tb.classList.remove('is-dragging')
+
+      document.removeEventListener('mousemove', drag)
+      document.removeEventListener('mouseup', mouseup)
+    }
+
+    document.addEventListener('mousemove', drag)
+    document.addEventListener('mouseup', mouseup)
+  })
+
+  corner.addEventListener('mousedown', (event) => {
+    let w = tb.clientWidth
+    let h = tb.clientHeight
+
+    let startX = event.pageX
+    let startY = event.pageY
+
+    const drag = (event) => {
+      event.preventDefault()
+
+      tb.style.width = w + (event.pageX - startX) + 'px'
+      tb.style.height = h + (event.pageY - startY) + 'px'
+    }
+
+    const mouseup = () => {
+      document.removeEventListener('mousemove', drag)
+      document.removeEventListener('mouseup', mouseup)
+    }
+
+    document.addEventListener('mousemove', drag)
+    document.addEventListener('mouseup', mouseup)
+  })
+})
+
+// Closes Containers 
 const closeButtons = document.querySelectorAll('.close-container');
 
 closeButtons.forEach(button => {
   button.addEventListener('click', () => {
-     const container = button.closest('.neo') || button.closest('.pane');
+     const container = button.closest('.neo') || button.closest('.pane')  || button.closest('.tb');
     if (container) {
       container.style.display = 'none';
     }

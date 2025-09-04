@@ -17,7 +17,7 @@
 /* css variables */
 :root {
   --desktop-color: #ff78f0;
-  --desktop-text-color: #ffffff;
+  --desktop-text-color: #000000;
 
   --title-bar-color: #cccccc;
   --title-bar-text-color: #333333;
@@ -33,9 +33,12 @@
 
   --neo-default-width: 400px;
   --neo-default-height: 500px;
-  /* --neo-border-radius: 27px; */
 
-  --neo-bar-color: ;
+  /* Text Box Design */
+
+  --tb-default-width: 320px;
+  --tb-default-height: 100px;
+
 }
 
 header h1 {
@@ -43,7 +46,8 @@ header h1 {
 }
 
 body {
-  background: var(--desktop-color);
+  /* background: var(--desktop-color); */
+  background-image: url(images/Vintage_Windows_Wallpaper.jpg);
 
   /* if outside of the window, clip */
   height: 100vh;
@@ -146,6 +150,8 @@ h1 {
   background-color: var(--title-bar-highlight-color);
 }
 
+/* ----- */
+
 /* Neobrutalism */
 .neo {
   font-family: 'Public Sans', sans-serif;
@@ -239,5 +245,106 @@ h1 {
 }
 
 .neo.is-dragging .title {
+  background-color: var(--title-bar-highlight-color);
+}
+
+/* ----- */
+
+/* Text Box */
+.tb {
+  font-family: 'Public Sans', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  position: absolute;
+
+  width: var(--tb-default-width);
+  height: fit-content;
+  /* aspect-ratio: 3/4; */
+
+  display: grid;
+  grid-template-rows: var(--title-bar-height) 1fr;
+
+  box-shadow: 4px 6px;
+
+  overflow: clip;
+
+  min-width: 160px;
+  /* min-height: 160px; */
+
+  border: solid black 4px;
+}
+
+.tb .title {
+  cursor: move;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  background-color: var(--title-bar-color);
+  color: var(--title-bar-text-color);
+  border-bottom: solid black 2px;
+}
+
+.tb .title-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.close-container {
+  display: flex;
+  cursor: pointer;
+}
+
+.tb .title img {
+  width: 20px;
+}
+
+.tb h2 {
+  font-size: 1rem;
+  margin: 0;
+}
+
+.tb .content {
+  position: relative;
+  background-color: var(--pane-content-background-color);
+}
+
+.tb .content p {
+  padding: 10px 10px;
+}
+
+/* make image fill the space */
+.tb .content img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+
+  object-fit: cover;
+
+  -webkit-user-drag: none;
+  user-drag: none;
+}
+
+/* add a corner in bottom right */
+.tb .corner {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 24px;
+  height: 24px;
+
+  /* north west to south east */
+  cursor: nwse-resize;
+
+  /* background-color: red; */
+}
+
+.tb.is-dragging .title {
   background-color: var(--title-bar-highlight-color);
 }

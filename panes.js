@@ -1,6 +1,7 @@
 const panes = document.querySelectorAll('.pane')
 const neos = document.querySelectorAll('.neo')
 const tbs = document.querySelectorAll('.tb')
+const w95s = document.querySelectorAll('.w95')
 
 let z = 1
 
@@ -186,12 +187,72 @@ tbs.forEach((tb) => {
   })
 })
 
+w95s.forEach((w95) => {
+  const title = w95.querySelector('.title')
+  const corner = w95.querySelector('.corner')
+
+  w95.addEventListener('mousedown', () => {
+    z = z + 1
+    w95.style.zIndex = z
+  })
+
+  title.addEventListener('mousedown', (event) => {
+    w95.classList.add('is-dragging')
+
+    let l = w95.offsetLeft
+    let t = w95.offsetTop
+
+    let startX = event.pageX
+    let startY = event.pageY
+
+    const drag = (event) => {
+      event.preventDefault()
+
+      w95.style.left = l + (event.pageX - startX) + 'px'
+      w95.style.top = t + (event.pageY - startY) + 'px'
+    }
+
+    const mouseup = () => {
+      w95.classList.remove('is-dragging')
+
+      document.removeEventListener('mousemove', drag)
+      document.removeEventListener('mouseup', mouseup)
+    }
+
+    document.addEventListener('mousemove', drag)
+    document.addEventListener('mouseup', mouseup)
+  })
+
+  corner.addEventListener('mousedown', (event) => {
+    let w = w95.clientWidth
+    let h = w95.clientHeight
+
+    let startX = event.pageX
+    let startY = event.pageY
+
+    const drag = (event) => {
+      event.preventDefault()
+
+      w95.style.width = w + (event.pageX - startX) + 'px'
+      w95.style.height = h + (event.pageY - startY) + 'px'
+    }
+
+    const mouseup = () => {
+      document.removeEventListener('mousemove', drag)
+      document.removeEventListener('mouseup', mouseup)
+    }
+
+    document.addEventListener('mousemove', drag)
+    document.addEventListener('mouseup', mouseup)
+  })
+})
+
 // Closes Containers 
 const closeButtons = document.querySelectorAll('.close-container');
 
 closeButtons.forEach(button => {
   button.addEventListener('click', () => {
-     const container = button.closest('.neo') || button.closest('.pane')  || button.closest('.tb');
+     const container = button.closest('.neo') || button.closest('.pane')  || button.closest('.tb')  || button.closest('.w95');
     if (container) {
       container.style.display = 'none';
     }

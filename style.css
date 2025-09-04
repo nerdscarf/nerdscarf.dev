@@ -1,7 +1,7 @@
 /* load google font */
 @import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,600;1,600&display=swap');
 
 @font-face {
   font-family: 'Xanh Mono';
@@ -35,10 +35,14 @@
   --neo-default-height: 500px;
 
   /* Text Box Design */
-
   --tb-default-width: 320px;
   --tb-default-height: 100px;
 
+  /* Windows 95 */
+  --w95-title-bar-color: #000080;
+  --w95-title-bar-text-color: #ffffff;
+  --w95-title-bar-height: 32px;
+  --w95-background-color: #c0c0c0;
 }
 
 header h1 {
@@ -59,6 +63,13 @@ h1 {
   padding: 32px;
   font-size: 1.5rem;
 }
+
+.close-container {
+  display: flex;
+  cursor: pointer;
+}
+
+/* ----- */
 
 /* Original */
 .pane {
@@ -98,12 +109,22 @@ h1 {
   gap: 6px;
 }
 
-.pane .red-dot {
+.pane .dot {
   width: 10px;
   height: 10px;
-  background-color: red;
   border-radius: 50%;
-  /* cursor: pointer; */
+}
+
+.pane .red-dot {
+background-color: #ef695e;
+}
+
+.pane .yellow-dot {
+background-color: #f8bb40;
+}
+
+.pane .green-dot {
+background-color: #62c354;
 }
 
 .pane h2 {
@@ -160,13 +181,11 @@ h1 {
   position: absolute;
 
   width: var(--neo-default-width);
-  /* height: var(--neo-default-height); */
   aspect-ratio: 3/4;
 
   display: grid;
   grid-template-rows: var(--title-bar-height) 1fr;
 
-  /* border-radius: var(--neo-border-radius); */
   box-shadow: 4px 6px;
 
   overflow: clip;
@@ -193,11 +212,6 @@ h1 {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-}
-
-.close-container {
-  display: flex;
-  cursor: pointer;
 }
 
 .neo .title img {
@@ -240,8 +254,6 @@ h1 {
 
   /* north west to south east */
   cursor: nwse-resize;
-
-  /* background-color: red; */
 }
 
 .neo.is-dragging .title {
@@ -269,7 +281,7 @@ h1 {
   overflow: clip;
 
   min-width: 160px;
-  /* min-height: 160px; */
+  min-height: fit-content;
 
   border: solid black 4px;
 }
@@ -290,11 +302,6 @@ h1 {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-}
-
-.close-container {
-  display: flex;
-  cursor: pointer;
 }
 
 .tb .title img {
@@ -341,10 +348,114 @@ h1 {
 
   /* north west to south east */
   cursor: nwse-resize;
-
-  /* background-color: red; */
 }
 
 .tb.is-dragging .title {
+  background-color: var(--title-bar-highlight-color);
+}
+
+/* ----- */
+
+/* Windows 95 */
+.w95 {
+  font-family: "Work Sans", sans-serif;
+  font-weight: 600;
+  text-transform: capitalize;
+  position: absolute;
+  border: 4px solid #808080;
+  border-top: solid white 2px;
+  border-bottom: solid black 2px;
+  background-color: var(--w95-background-color);
+
+  width: var(--neo-default-width);
+  aspect-ratio: 3/4;
+
+  display: grid;
+  grid-template-rows: var(--title-bar-height) 1fr;
+
+  overflow: clip;
+  box-shadow: 2px 1px;
+
+  min-width: 160px;
+  min-height: 160px;
+}
+
+.w95 .title {
+  cursor: move;
+  display: flex;
+  padding: 0px 5px;
+  background-color: var(--w95-title-bar-color);
+  color: var(--w95-title-bar-text-color);
+  border-bottom: solid white 1px;
+}
+
+.w95 .title-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.w95 .title img {
+  width: 20px;
+}
+
+.w95 h2 {
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+.w95 .close-container {
+  background-color: #bdbdbd;
+  border-bottom: solid black 2px;
+  border-top: solid white 2px;
+  border-left: solid white 2px;
+  border-right: solid black 2px;
+}
+
+.w95 .content {
+  position: relative;
+  margin: 6px;
+  border-top: solid black 4px;
+  border-right: solid white 2p x;
+  border-bottom: solid white 2px;
+  border-left: solid black 4px;
+}
+
+.w95 .content p {
+  padding: 10px 10px;
+}
+
+/* make image fill the space */
+.w95 .content img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  border-right: solid 3px var(--w95-background-color);
+
+  object-fit: cover;
+
+  -webkit-user-drag: none;
+  user-drag: none;
+}
+
+/* add a corner in bottom right */
+.w95 .corner {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 24px;
+  height: 24px;
+
+  /* north west to south east */
+  cursor: nwse-resize;
+}
+
+.w95.is-dragging .title {
   background-color: var(--title-bar-highlight-color);
 }

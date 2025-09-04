@@ -1,3 +1,2 @@
-Try moving things around, closing or resizing windows. Refresh the page to reset everything back
-
 // To Do
+Create 90s windows browser. 
